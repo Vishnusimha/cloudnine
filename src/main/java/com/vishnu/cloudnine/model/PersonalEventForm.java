@@ -1,10 +1,9 @@
 package com.vishnu.cloudnine.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 
-public class PersonalForm {
+public class PersonalEventForm {
 
     @JsonProperty("planno")
     private String planNo;
@@ -52,11 +51,11 @@ public class PersonalForm {
 
 
     // default constructor
-    public PersonalForm() {
+    public PersonalEventForm() {
     }
 
     // parameterized constructor
-    public PersonalForm(String planNo, String sponsor, String name, String email, String occasion, String date, String occasionTime, String location, boolean fathersDay, boolean mothersDay, boolean anniversary, String country) {
+    public PersonalEventForm(String planNo, String sponsor, String name, String email, String occasion, String date, String occasionTime, String location, boolean fathersDay, boolean mothersDay, boolean anniversary, String country) {
         this.planNo = planNo;
         this.sponsor = sponsor;
         this.name = name;

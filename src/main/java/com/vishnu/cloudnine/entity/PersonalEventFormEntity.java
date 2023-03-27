@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class PersonalFormEntity {
+public class PersonalEventFormEntity {
 //    @Entity(name = "personalform")
 
     //        @Id

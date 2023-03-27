@@ -14,8 +14,8 @@ import static com.vishnu.cloudnine.util.ErrorCode.INVALID_USER_REQUEST;
 @ControllerAdvice
 public class AppExceptionHandler {
 
-    @ExceptionHandler(value = {PersonalFormServiceException.class})
-    public ResponseEntity handleLectureServiceException(PersonalFormServiceException ex) {
+    @ExceptionHandler(value = {PersonalEventFormServiceException.class})
+    public ResponseEntity handleLectureServiceException(PersonalEventFormServiceException ex) {
         return mapToError(ex.getMessage(), ex.getErrorCode());
     }
 

@@ -2,7 +2,7 @@ package com.vishnu.cloudnine.service;
 
 import com.vishnu.cloudnine.model.CorporateForm;
 import com.vishnu.cloudnine.util.ErrorCode;
-import com.vishnu.cloudnine.util.PersonalFormServiceException;
+import com.vishnu.cloudnine.util.PersonalEventFormServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -76,7 +76,7 @@ public class CorporateFormService {
 
     public CorporateForm addLecture(CorporateForm personalForm) {
         if (corporateForms.containsKey(personalForm.getWeek())) {
-            throw new PersonalFormServiceException("CorporateForm for this week already exist", ErrorCode.FORM_DUPLICATION);
+            throw new PersonalEventFormServiceException("CorporateForm for this week already exist", ErrorCode.FORM_DUPLICATION);
         }
         corporateForms.put(personalForm.getWeek(), personalForm);
         return personalForm;
