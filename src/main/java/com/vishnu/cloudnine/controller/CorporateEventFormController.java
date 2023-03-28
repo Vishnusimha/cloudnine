@@ -23,10 +23,8 @@ public class CorporateEventFormController {
     @PostMapping("/post-corporate-form")
     @CrossOrigin(origins = "*")
     public ResponseEntity<CorporateEventForm> postCorporateEventForm(@RequestBody CorporateEventForm corporateEventForm) throws IOException {
-        // Saving the CorporateEventForm object to the database using the service
         System.out.println("postCorporateEventForm===================");
         corporateEventFormService.saveCorporateEventForm(corporateEventForm);
-//        return ResponseEntity.ok("CorporateEventForm saved successfully");
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
