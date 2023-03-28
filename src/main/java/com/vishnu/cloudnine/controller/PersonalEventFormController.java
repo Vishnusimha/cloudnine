@@ -30,9 +30,9 @@ public class PersonalEventFormController {
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
-    @GetMapping
+    @GetMapping("/personallist")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<List<PersonalEventForm>> listPersonalFormData() {
+    public ResponseEntity<List<PersonalEventForm>> listPersonalFormData() throws IOException {
         System.out.println("listPersonalFormData===================");
         return ResponseEntity.ok(personalFormService.listPersonalFormData());
     }

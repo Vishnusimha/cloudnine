@@ -7,14 +7,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.vishnu.cloudnine.model.PersonalEventForm;
 import com.vishnu.cloudnine.util.ErrorCode;
 import com.vishnu.cloudnine.util.PersonalEventFormServiceException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class PersonalEventFormService {
@@ -26,18 +24,11 @@ public class PersonalEventFormService {
 
     }
 
-//    private PersonalEventForm createPersonalForm(int week, String author, String title, String preface) {
-//        PersonalEventForm personalForm = new PersonalEventForm();
-//        personalForm.se(author);
-//        personalForm.setTitle(title);
-//        personalForm.setWeek(week);
-//        personalForm.setPreface(preface);
-//        return personalForm;
-//    }
-
-    public List<PersonalEventForm> listPersonalFormData() {
-        System.out.println("listPersonalFormData===================");
-        return new ArrayList<>(personalFormsKeyData.values());
+    public List<PersonalEventForm> listPersonalFormData() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        ClassPathResource resource = new ClassPathResource("json/personal_form.json");
+        PersonalEventForm[] forms = objectMapper.readValue(resource.getInputStream(), PersonalEventForm[].class);
+        return Arrays.asList(forms);
     }
 
     public PersonalEventForm addLecture(PersonalEventForm personalEventForm) {
@@ -51,10 +42,6 @@ public class PersonalEventFormService {
     public void savePersonalForm(PersonalEventForm personalEventForm) throws IOException {
         String filename = "personal_form.json";
         String filePath = "src/main/resources/json/" + filename;
-
-//        if (keys.contains(personalEventForm.getPlanNo())) {
-//            throw new PersonalEventFormServiceException("PersonalEventForm already exist", ErrorCode.FORM_DUPLICATION);
-//        }
 
         File file = new File(filePath);
         if (!file.exists()) {

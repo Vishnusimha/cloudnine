@@ -28,9 +28,9 @@ public class CorporateEventFormController {
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
-    @GetMapping("/list")
+    @GetMapping("/corporatelist")
     @CrossOrigin(origins = "*")
-    public ResponseEntity<List<CorporateEventForm>> listCorporateFormData() {
+    public ResponseEntity<List<CorporateEventForm>> listCorporateFormData() throws IOException {
         System.out.println("listCorporateFormData===================");
         return ResponseEntity.ok(corporateEventFormService.listCorporateEventFormData());
     }
