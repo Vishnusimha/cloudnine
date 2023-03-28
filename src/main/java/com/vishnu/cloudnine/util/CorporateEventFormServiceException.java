@@ -10,12 +10,12 @@ package com.vishnu.cloudnine.util;
  * @project lecture-demo
  * @author Katarzyna Fidos
  */
-public class CorporateFormServiceException extends RuntimeException {
+public class CorporateEventFormServiceException extends RuntimeException {
     ErrorCode errorCode;
-    public CorporateFormServiceException(String message, ErrorCode errorCode) {
+    public CorporateEventFormServiceException(String message, ErrorCode errorCode) {
         this(message, errorCode, null);
     }
-    public CorporateFormServiceException(final String message, ErrorCode errorCode, final Throwable cause) {
+    public CorporateEventFormServiceException(final String message, ErrorCode errorCode, final Throwable cause) {
         super(message, cause);
         this.errorCode = errorCode;
     }
