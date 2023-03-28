@@ -1,6 +1,7 @@
 package com.vishnu.cloudnine.service;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -12,10 +13,14 @@ import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
+
 
 @Service
 public class PersonalEventFormService {
+    private static final String JSON_FILE_PATH = "src/main/resources/json/personal_form.json";
 
     private Map<String, PersonalEventForm> personalFormsKeyData = new HashMap<>();
     private ArrayList<String> keys = new ArrayList();
@@ -29,6 +34,21 @@ public class PersonalEventFormService {
         ClassPathResource resource = new ClassPathResource("json/personal_form.json");
         PersonalEventForm[] forms = objectMapper.readValue(resource.getInputStream(), PersonalEventForm[].class);
         return Arrays.asList(forms);
+    }
+
+    public List<JsonNode> getPersonalFormData(String sponsoremail) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonContent = Files.readString(Paths.get(JSON_FILE_PATH));
+        JsonNode jsonNode = objectMapper.readTree(jsonContent);
+
+        List<JsonNode> filteredData = new ArrayList<>();
+        for (JsonNode node : jsonNode) {
+            if (node.get("sponsoremail").asText().equals(sponsoremail)) {
+                filteredData.add(node);
+            }
+        }
+        return filteredData;
     }
 
     public PersonalEventForm addLecture(PersonalEventForm personalEventForm) {

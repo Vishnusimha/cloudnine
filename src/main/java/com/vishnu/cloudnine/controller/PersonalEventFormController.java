@@ -1,5 +1,6 @@
 package com.vishnu.cloudnine.controller;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.vishnu.cloudnine.model.PersonalEventForm;
 import com.vishnu.cloudnine.service.PersonalEventFormService;
 import jakarta.validation.Valid;
@@ -35,6 +36,15 @@ public class PersonalEventFormController {
     public ResponseEntity<List<PersonalEventForm>> listPersonalFormData() throws IOException {
         System.out.println("listPersonalFormData===================");
         return ResponseEntity.ok(personalFormService.listPersonalFormData());
+    }
+
+    @GetMapping("/{sponsoremail}")
+    @CrossOrigin(origins = "*")
+    public List<JsonNode> getPersonalFormData(@PathVariable String sponsoremail) throws IOException {
+        System.out.println("getPersonalFormData===================" + sponsoremail);
+        System.out.println(personalFormService.getPersonalFormData(sponsoremail));
+
+        return ResponseEntity.ok(personalFormService.getPersonalFormData(sponsoremail)).getBody();
     }
 
     @PostMapping

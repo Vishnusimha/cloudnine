@@ -8,16 +8,16 @@ import lombok.Setter;
 @Setter
 @Builder
 public class CorporateEventFormEntity {
-        private String planNo;
-        private String sponsor;
-        private String name;
-        private String email;
-        private String occasion;
-        private String date;
-        private String occasionTime;
-        private String location;
-        private boolean fathersDay;
-        private boolean mothersDay;
-        private boolean anniversary;
-        private String country;
+    private String planNo;
+    private String sponsor;
+    private String name;
+    private String email;
+    private String occasion;
+    private String date;
+    private String occasionTime;
+    private String location;
+    private boolean fathersDay;
+    private boolean mothersDay;
+    private boolean anniversary;
+    private String country;
 }
