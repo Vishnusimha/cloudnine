@@ -1,32 +1,4 @@
 [ {
-  "planno" : "44",
-  "sponsor" : "asa",
-  "companyname" : "fdsds",
-  "sponsoremail" : "vishnu.dussa2@mail.dcu.ie",
-  "companyemail" : "vishnu.dussa2@mail.dcu.ie",
-  "occasion" : "hello",
-  "occasiondate" : "0123-03-12",
-  "occasiontime" : "00:32",
-  "location" : "212",
-  "officeparty" : true,
-  "milestoneevents" : false,
-  "achievements" : true,
-  "country" : "India"
-}, {
-  "planno" : "44",
-  "sponsor" : "asa",
-  "companyname" : "fdsds",
-  "sponsoremail" : "vishnu.dussa2@mail.dcu.ie",
-  "companyemail" : "vishnu.dussa2@mail.dcu.ie",
-  "occasion" : "hello",
-  "occasiondate" : "0123-03-12",
-  "occasiontime" : "00:32",
-  "location" : "212",
-  "officeparty" : true,
-  "milestoneevents" : false,
-  "achievements" : true,
-  "country" : "India"
-}, {
   "planno" : "323232",
   "sponsor" : "asa",
   "companyname" : "fdsds",
