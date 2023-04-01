@@ -14,6 +14,14 @@ import static com.vishnu.cloudnine.util.ErrorCode.INVALID_USER_REQUEST;
 @ControllerAdvice
 public class AppExceptionHandler {
 
+    public static ResponseEntity<Error> mapToError(String message, ErrorCode errorCode) {
+        return new ResponseEntity<>(new Error()
+                .code(errorCode.getCodeName())
+                .message(message)
+                .status(errorCode.getHttpStatus().value()),
+                errorCode.getHttpStatus());
+    }
+
     @ExceptionHandler(value = {PersonalEventFormServiceException.class})
     public ResponseEntity handleLectureServiceException(PersonalEventFormServiceException ex) {
         return mapToError(ex.getMessage(), ex.getErrorCode());
@@ -22,7 +30,7 @@ public class AppExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Error> handleValidationErrors(MethodArgumentNotValidException ex) {
         List<String> errors = ex.getBindingResult().getFieldErrors()
-                .stream().map(e -> e.getField() + " "+ e.getDefaultMessage() ).collect(Collectors.toList());
+                .stream().map(e -> e.getField() + " " + e.getDefaultMessage()).collect(Collectors.toList());
         StringJoiner joiner = new StringJoiner(" \n ", "", "");
         errors.forEach(joiner::add);
         return mapToError(joiner.toString(), INVALID_USER_REQUEST);
@@ -33,15 +41,11 @@ public class AppExceptionHandler {
         return mapToError(ex.getMessage(), ErrorCode.UNEXPECTED_SERVER_ERROR);
     }
 
-    public static ResponseEntity<Error> mapToError(String message, ErrorCode errorCode) {
-        return new ResponseEntity<>(new Error()
-                .code(errorCode.getCodeName())
-                .message(message)
-                .status(errorCode.getHttpStatus().value()),
-                errorCode.getHttpStatus());
-    }
-
     static class Error {
+        private String code;
+        private String message;
+        private Integer status;
+
         public Error() {
         }
 
@@ -60,11 +64,6 @@ public class AppExceptionHandler {
             this.status = status;
             return this;
         }
-        private String code;
-
-        private String message;
-
-        private Integer status;
 
         public String getCode() {
             return code;
