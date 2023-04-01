@@ -19,7 +19,6 @@ import java.util.*;
 
 @Service
 public class CorporateEventFormService {
-    private static final String JSON_FILE_PATH = "src/main/resources/json/corporate_form.json";
 
     private Map<String, CorporateEventForm> corporateEventFormsData = new HashMap<>();
     private ArrayList<String> keys = new ArrayList();
@@ -46,7 +45,8 @@ public class CorporateEventFormService {
     public List<JsonNode> getCorporateFormData(String sponsoremail) throws IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        String jsonContent = Files.readString(Paths.get(JSON_FILE_PATH));
+        ClassPathResource resource = new ClassPathResource("json/corporate_form.json");
+        String jsonContent = Files.readString(Paths.get(resource.getURI()));
         JsonNode jsonNode = objectMapper.readTree(jsonContent);
 
         List<JsonNode> filteredData = new ArrayList<>();

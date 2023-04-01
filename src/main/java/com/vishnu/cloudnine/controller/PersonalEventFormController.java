@@ -27,7 +27,6 @@ public class PersonalEventFormController {
         // Saving the PersonalEventForm object to the database using the service
         System.out.println("postPersonalForm===================");
         personalFormService.savePersonalForm(personalEventForm);
-//        return ResponseEntity.ok("PersonalEventForm saved successfully");
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 
@@ -40,11 +39,10 @@ public class PersonalEventFormController {
 
     @GetMapping("/{sponsoremail}")
     @CrossOrigin(origins = "*")
-    public List<JsonNode> getPersonalFormData(@PathVariable String sponsoremail) throws IOException {
+    public ResponseEntity<List<JsonNode>> getPersonalFormData(@PathVariable String sponsoremail) throws IOException {
         System.out.println("getPersonalFormData===================" + sponsoremail);
         System.out.println(personalFormService.getPersonalFormData(sponsoremail));
-
-        return ResponseEntity.ok(personalFormService.getPersonalFormData(sponsoremail)).getBody();
+        return ResponseEntity.ok(personalFormService.getPersonalFormData(sponsoremail));
     }
 
     @PostMapping
@@ -54,7 +52,4 @@ public class PersonalEventFormController {
         personalFormService.addLecture(personalEventForm);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
-//	@DeleteMapping
-//	@PutMapping
-//	@PatchMapping
 }
