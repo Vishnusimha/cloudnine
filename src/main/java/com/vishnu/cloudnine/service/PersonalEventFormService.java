@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.vishnu.cloudnine.model.PersonalEventForm;
-import com.vishnu.cloudnine.util.ErrorCode;
-import com.vishnu.cloudnine.util.PersonalEventFormServiceException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +13,13 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Service
 public class PersonalEventFormService {
-
-    private Map<String, PersonalEventForm> personalFormsKeyData = new HashMap<>();
-    private ArrayList<String> keys = new ArrayList();
 
     public PersonalEventFormService() {
 
@@ -48,14 +45,6 @@ public class PersonalEventFormService {
             }
         }
         return filteredData;
-    }
-
-    public PersonalEventForm addLecture(PersonalEventForm personalEventForm) {
-        if (personalFormsKeyData.containsKey(personalEventForm.getPlanNo())) {
-            throw new PersonalEventFormServiceException("PersonalEventForm for this week already exist", ErrorCode.FORM_DUPLICATION);
-        }
-        personalFormsKeyData.put(personalEventForm.getPlanNo(), personalEventForm);
-        return personalEventForm;
     }
 
     public void savePersonalForm(PersonalEventForm personalEventForm) throws IOException {
@@ -87,5 +76,4 @@ public class PersonalEventFormService {
 
         writer.writeValue(file, personalEventFormsData);
     }
-
 }

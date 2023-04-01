@@ -6,8 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.vishnu.cloudnine.model.CorporateEventForm;
-import com.vishnu.cloudnine.util.ErrorCode;
-import com.vishnu.cloudnine.util.PersonalEventFormServiceException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +13,12 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class CorporateEventFormService {
-
-    private Map<String, CorporateEventForm> corporateEventFormsData = new HashMap<>();
-    private ArrayList<String> keys = new ArrayList();
 
     public CorporateEventFormService() {
 
@@ -32,14 +29,6 @@ public class CorporateEventFormService {
         ClassPathResource resource = new ClassPathResource("json/corporate_form.json");
         CorporateEventForm[] forms = objectMapper.readValue(resource.getInputStream(), CorporateEventForm[].class);
         return Arrays.asList(forms);
-    }
-
-    public CorporateEventForm addCorporateEventForm(CorporateEventForm corporateEventForm) {
-        if (corporateEventFormsData.containsKey(corporateEventForm.getPlanNo())) {
-            throw new PersonalEventFormServiceException("CorporateEventForm for this week already exist", ErrorCode.FORM_DUPLICATION);
-        }
-        corporateEventFormsData.put(corporateEventForm.getPlanNo(), corporateEventForm);
-        return corporateEventForm;
     }
 
     public List<JsonNode> getCorporateFormData(String sponsoremail) throws IOException {
@@ -87,5 +76,4 @@ public class CorporateEventFormService {
 
         writer.writeValue(file, corporateEventFormsData);
     }
-
 }

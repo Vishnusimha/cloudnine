@@ -3,8 +3,6 @@ package com.vishnu.cloudnine.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vishnu.cloudnine.model.PersonalEventForm;
 import com.vishnu.cloudnine.service.PersonalEventFormService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,13 +41,5 @@ public class PersonalEventFormController {
         System.out.println("getPersonalFormData===================" + sponsoremail);
         System.out.println(personalFormService.getPersonalFormData(sponsoremail));
         return ResponseEntity.ok(personalFormService.getPersonalFormData(sponsoremail));
-    }
-
-    @PostMapping
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<Void> createPersonalForm(@RequestBody @Valid @NotNull PersonalEventForm personalEventForm) {
-        System.out.println("createPersonalForm===================");
-        personalFormService.addLecture(personalEventForm);
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
 }

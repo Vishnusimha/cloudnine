@@ -3,8 +3,6 @@ package com.vishnu.cloudnine.controller;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.vishnu.cloudnine.model.CorporateEventForm;
 import com.vishnu.cloudnine.service.CorporateEventFormService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,14 +39,5 @@ public class CorporateEventFormController {
     public ResponseEntity<List<JsonNode>> getCorporateFormData(@PathVariable String sponsoremail) throws IOException {
         System.out.println("getPersonalFormData===================" + sponsoremail);
         return ResponseEntity.ok(corporateEventFormService.getCorporateFormData(sponsoremail));
-    }
-
-    @PostMapping
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<Void> createCorporateForm(@RequestBody @Valid @NotNull CorporateEventForm lecture) {
-        System.out.println("postCorporateEventForm===================");
-        corporateEventFormService.addCorporateEventForm(lecture);
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
-
     }
 }
