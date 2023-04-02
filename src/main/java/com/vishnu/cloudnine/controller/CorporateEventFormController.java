@@ -37,7 +37,7 @@ public class CorporateEventFormController {
     @GetMapping("/{sponsoremail}")
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<JsonNode>> getCorporateFormData(@PathVariable String sponsoremail) throws IOException {
-        System.out.println("getPersonalFormData===================" + sponsoremail);
+        System.out.println("getCorporateFormData===================" + sponsoremail);
         return ResponseEntity.ok(corporateEventFormService.getCorporateFormData(sponsoremail));
     }
 }
