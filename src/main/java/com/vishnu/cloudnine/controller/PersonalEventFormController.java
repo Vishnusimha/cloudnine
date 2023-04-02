@@ -24,6 +24,7 @@ public class PersonalEventFormController {
     public ResponseEntity<PersonalEventForm> postPersonalForm(@RequestBody PersonalEventForm personalEventForm) throws IOException {
         // Saving the PersonalEventForm object to the database using the service
         System.out.println("postPersonalForm===================");
+        // sending personalEventForm to personalFormService to save the data there in a JSON file
         personalFormService.savePersonalForm(personalEventForm);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
@@ -32,6 +33,7 @@ public class PersonalEventFormController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<PersonalEventForm>> listPersonalFormData() throws IOException {
         System.out.println("listPersonalFormData===================");
+        // returning PersonalFormData to front end
         return ResponseEntity.ok(personalFormService.listPersonalFormData());
     }
 
@@ -39,6 +41,7 @@ public class PersonalEventFormController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<JsonNode>> getPersonalFormData(@PathVariable String sponsoremail) throws IOException {
         System.out.println("getPersonalFormData===================" + sponsoremail);
+        // returning PersonalFormData to front end that is queried with sponsoremail
         System.out.println(personalFormService.getPersonalFormData(sponsoremail));
         return ResponseEntity.ok(personalFormService.getPersonalFormData(sponsoremail));
     }

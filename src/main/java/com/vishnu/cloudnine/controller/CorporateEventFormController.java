@@ -23,6 +23,7 @@ public class CorporateEventFormController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<CorporateEventForm> postCorporateEventForm(@RequestBody CorporateEventForm corporateEventForm) throws IOException {
         System.out.println("postCorporateEventForm===================");
+        // Saving the corporateEventForm object to the database using the service
         corporateEventFormService.saveCorporateEventForm(corporateEventForm);
         return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
     }
@@ -31,6 +32,7 @@ public class CorporateEventFormController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<CorporateEventForm>> listCorporateFormData() throws IOException {
         System.out.println("listCorporateFormData===================");
+        // returning CorporateFormData to front end
         return ResponseEntity.ok(corporateEventFormService.listCorporateEventFormData());
     }
 
@@ -38,6 +40,7 @@ public class CorporateEventFormController {
     @CrossOrigin(origins = "*")
     public ResponseEntity<List<JsonNode>> getCorporateFormData(@PathVariable String sponsoremail) throws IOException {
         System.out.println("getCorporateFormData===================" + sponsoremail);
+        // returning CorporateFormData to front end that is queried with sponsoremail
         return ResponseEntity.ok(corporateEventFormService.getCorporateFormData(sponsoremail));
     }
 }

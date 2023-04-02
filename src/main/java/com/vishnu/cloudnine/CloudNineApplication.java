@@ -10,6 +10,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class CloudNineApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
+//      Application class. starting point of the application
         SpringApplication.run(CloudNineApplication.class, args);
     }
 
