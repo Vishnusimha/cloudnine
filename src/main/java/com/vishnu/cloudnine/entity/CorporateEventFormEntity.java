@@ -1,86 +1,78 @@
-package com.vishnu.cloudnine.model;
+package com.vishnu.cloudnine.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.*;
 
-public class CorporateEventForm {
+@Entity
+@Table(name = "CORPORATE")
+public class CorporateEventFormEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "PLAN_NO")
+    private int planNo;
 
-    @JsonProperty("planno")
-    private String planNo;
-
-    @JsonProperty("sponsor")
-    @NotNull
+    @Column(name = "SPONSOR", nullable = false)
     private String sponsor;
 
-    @JsonProperty("companyname")
-    @NotNull
+    @Column(name = "COMPANY_NAME", nullable = false)
     private String companyName;
 
-    @JsonProperty("sponsoremail")
-    @NotNull
+    @Column(name = "SPONSOR_EMAIL", nullable = false, unique = true)
+//    @Column(name = "SPONSOR_EMAIL", nullable = false)
     private String sponsorEmail;
 
-    @JsonProperty("companyemail")
-    @NotNull
+    @Column(name = "COMPANY_EMAIL")
     private String companyEmail;
 
-    @JsonProperty("occasion")
-    @NotNull
+    @Column(name = "OCCASION", nullable = false)
     private String occasion;
 
-    @JsonProperty("occasiondate")
-    @NotNull
+    @Column(name = "OCCASION_DATE")
     private String occasionDate;
 
-    @JsonProperty("occasiontime")
-    @NotNull
+    @Column(name = "OCCASION_TIME")
     private String occasionTime;
 
-    @JsonProperty("location")
-    @NotNull
+    @Column(name = "LOCATION", columnDefinition = "VARCHAR(30) DEFAULT 'DUBLIN'")
     private String location;
 
-    @JsonProperty("officeparty")
-    private boolean officeParty;
-
-    @JsonProperty("milestoneevents")
-    private boolean milestoneEvents;
-
-    @JsonProperty("achievements")
-    private boolean achievements;
-
-    @JsonProperty("country")
-    @NotNull
+    @Column(name = "COUNTRY", columnDefinition = "VARCHAR(30) DEFAULT 'Ireland'")
     private String country;
 
-    public CorporateEventForm() {
-        // empty constructor
+    @Column(name = "OFFICE_PARTY", columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean officeParty;
+
+    @Column(name = "MILESTONE_EVENT", columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean milestoneEvent = false;
+
+    @Column(name = "ACHIEVEMENT", columnDefinition = "BOOLEAN DEFAULT false")
+    private boolean achievement;
+
+
+    public CorporateEventFormEntity() {
     }
 
-    public CorporateEventForm(String planNo, String sponsor, String companyName, String sponsorEmail, String companyEmail,
-                              String occasion, String occasionDate, String occasionTime, String location,
-                              boolean officeParty, boolean milestoneEvents, boolean achievements, String country) {
+    public CorporateEventFormEntity(int planNo, String sponsorEmail, String sponsor, String companyName, String companyEmail, String occasion, String occasionDate, String occasionTime, String location, String country, boolean officeParty, boolean milestoneEvent, boolean achievement) {
         this.planNo = planNo;
+        this.sponsorEmail = sponsorEmail;
         this.sponsor = sponsor;
         this.companyName = companyName;
-        this.sponsorEmail = sponsorEmail;
         this.companyEmail = companyEmail;
         this.occasion = occasion;
         this.occasionDate = occasionDate;
         this.occasionTime = occasionTime;
         this.location = location;
-        this.officeParty = officeParty;
-        this.milestoneEvents = milestoneEvents;
-        this.achievements = achievements;
         this.country = country;
+        this.officeParty = officeParty;
+        this.milestoneEvent = milestoneEvent;
+        this.achievement = achievement;
     }
 
-    public String getPlanNo() {
-        return planNo;
+    public String getSponsorEmail() {
+        return sponsorEmail;
     }
 
-    public void setPlanNo(String planNo) {
-        this.planNo = planNo;
+    public void setSponsorEmail(String sponsorEmail) {
+        this.sponsorEmail = sponsorEmail;
     }
 
     public String getSponsor() {
@@ -97,14 +89,6 @@ public class CorporateEventForm {
 
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
-    }
-
-    public String getSponsorEmail() {
-        return sponsorEmail;
-    }
-
-    public void setSponsorEmail(String sponsorEmail) {
-        this.sponsorEmail = sponsorEmail;
     }
 
     public String getCompanyEmail() {
@@ -156,19 +140,19 @@ public class CorporateEventForm {
     }
 
     public boolean isMilestoneEvents() {
-        return milestoneEvents;
+        return milestoneEvent;
     }
 
     public void setMilestoneEvents(boolean milestoneEvents) {
-        this.milestoneEvents = milestoneEvents;
+        this.milestoneEvent = milestoneEvents;
     }
 
     public boolean isAchievements() {
-        return achievements;
+        return achievement;
     }
 
     public void setAchievements(boolean achievements) {
-        this.achievements = achievements;
+        this.achievement = achievements;
     }
 
     public String getCountry() {
@@ -177,5 +161,13 @@ public class CorporateEventForm {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public int getPlanNo() {
+        return planNo;
+    }
+
+    public void setPlanNo(int planNo) {
+        this.planNo = planNo;
     }
 }

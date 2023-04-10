@@ -1,13 +1,9 @@
 package com.vishnu.cloudnine.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.vishnu.cloudnine.model.CorporateEventForm;
+import com.vishnu.cloudnine.entity.CorporateEventFormEntity;
 import com.vishnu.cloudnine.service.CorporateEventFormService;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -19,28 +15,29 @@ public class CorporateEventFormController {
         this.corporateEventFormService = corporateEventFormService;
     }
 
-    @PostMapping("/post-corporate-form")
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<CorporateEventForm> postCorporateEventForm(@RequestBody CorporateEventForm corporateEventForm) throws IOException {
-        System.out.println("postCorporateEventForm===================");
-        // Saving the corporateEventForm object to the database using the service
-        corporateEventFormService.saveCorporateEventForm(corporateEventForm);
-        return ResponseEntity.status(HttpStatusCode.valueOf(201)).build();
+    @GetMapping("/getcorporateform")
+    public List<CorporateEventFormEntity> listCorporateEventFormData() {
+        System.out.println(" CorporateEventFormController: listCorporateEventFormData");
+        return corporateEventFormService.listCorporateEventFormData();
     }
 
-    @GetMapping("/corporatelist")
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<List<CorporateEventForm>> listCorporateFormData() throws IOException {
-        System.out.println("listCorporateFormData===================");
-        // returning CorporateFormData to front end
-        return ResponseEntity.ok(corporateEventFormService.listCorporateEventFormData());
+    @GetMapping("/getcorporateform/{sponsorEmail}")
+    public CorporateEventFormEntity getCorporateEventFormBySponsorEmail(@PathVariable String sponsorEmail) {
+        System.out.println(" CorporateEventFormController: getCorporateEventFormBySponsorEmail");
+
+        System.out.println("getCorporateEventFormBySponsorEmail");
+        return corporateEventFormService.getCorporateEventFormBySponsorEmail(sponsorEmail);
     }
 
-    @GetMapping("/{sponsoremail}")
-    @CrossOrigin(origins = "*")
-    public ResponseEntity<List<JsonNode>> getCorporateFormData(@PathVariable String sponsoremail) throws IOException {
-        System.out.println("getCorporateFormData===================" + sponsoremail);
-        // returning CorporateFormData to front end that is queried with sponsoremail
-        return ResponseEntity.ok(corporateEventFormService.getCorporateFormData(sponsoremail));
+    @PostMapping("/postcorporateform")
+    public void saveCorporateEventForm(@RequestBody CorporateEventFormEntity corporateEventFormEntity) {
+        System.out.println(" CorporateEventFormController: saveCorporateEventForm");
+        corporateEventFormService.saveCorporateEventForm(corporateEventFormEntity);
+    }
+
+    @DeleteMapping("/deletecorporateform/{sponsorEmail}")
+    public void deleteCorporateEventForm(@PathVariable String sponsorEmail) {
+        System.out.println(" CorporateEventFormController: deleteCorporateEventForm");
+        corporateEventFormService.deleteCorporateEventFormBySponsorEmail(sponsorEmail);
     }
 }
