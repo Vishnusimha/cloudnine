@@ -2,10 +2,7 @@ package com.vishnu.cloudnine.controller;
 
 import com.vishnu.cloudnine.model.Admin;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -41,6 +38,7 @@ public class LoginController {
 //    }
 
     @PostMapping("/login")
+    @CrossOrigin(origins = "*")
     public ResponseEntity<Object> login(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");

@@ -16,22 +16,26 @@ public class PersonalEventFormController {
     }
 
     @GetMapping("/getpersonalform")
+    @CrossOrigin(origins = "*")
     public List<PersonalEventFormEntity> listPersonalEventFormData() {
         return personalEventFormService.listPersonalEventFormData();
     }
 
     @GetMapping("/getpersonalform/{sponsorEmail}")
+    @CrossOrigin(origins = "*")
     public PersonalEventFormEntity getPersonalEventFormBySponsorEmail(@PathVariable String sponsorEmail) {
         System.out.println("getPersonalEventFormBySponsorEmail");
         return personalEventFormService.getPersonalEventFormBySponsorEmail(sponsorEmail);
     }
 
     @PostMapping("/postpersonalform")
+    @CrossOrigin(origins = "*")
     public void savePersonalEventForm(@RequestBody PersonalEventFormEntity personalEventFormEntity) {
         personalEventFormService.savePersonalEventForm(personalEventFormEntity);
     }
 
     @DeleteMapping("/deletepersonalform/{sponsorEmail}")
+    @CrossOrigin(origins = "*")
     public void deletePersonalEventFormBySponsorEmail(@PathVariable String sponsorEmail) {
         personalEventFormService.deletePersonalEventFormBySponsorEmail(sponsorEmail);
     }
