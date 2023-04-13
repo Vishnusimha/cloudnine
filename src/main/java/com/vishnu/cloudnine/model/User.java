@@ -1,16 +1,37 @@
 package com.vishnu.cloudnine.model;
 
-public class Admin {
+public class User {
     private String username;
     private String password;
 
-    public Admin() {
+    private UserRole role;
+
+    public User() {
         // default constructor
     }
 
-    public Admin(String username, String password) {
+    public enum UserRole {
+        ADMIN,
+        GENERAL_USER
+    }
+
+    public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public User(String username, String password, UserRole role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     // getters and setters
