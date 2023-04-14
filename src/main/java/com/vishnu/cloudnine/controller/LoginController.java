@@ -48,7 +48,7 @@ public class LoginController {
             return ResponseEntity.ok().body(response);
         } else if (role == User.UserRole.GENERAL_USER) {
             response.put("success", true);
-            response.put("redirectUrl", "http://localhost:8081/CloudnineBallloonDecor/index.html");
+            response.put("redirectUrl", "http://localhost:8081/CloudnineBallloonDecor/events.html");
             return ResponseEntity.ok().body(response);
         } else {
             // If authentication fails for all admins, return an error response with the redirect URL for the login page
