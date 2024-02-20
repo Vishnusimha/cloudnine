@@ -1,7 +1,6 @@
 # cloudnine
- Cloud Nine Spring Boot backend application
-
+ Cloudnine Springboot Backend Application 
 
 Please visit this project for usage/testing --> [Front end app for this backend](https://github.com/Vishnusimha/webapp)
 
-check latest branch for updated & all features
+check the latest branch for updates & all features
